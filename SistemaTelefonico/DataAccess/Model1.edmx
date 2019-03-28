@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BDTelefoniaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Departamento">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_Municipio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Codigo" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CodigoDepartamento" Type="int" Nullable="false" />
+          <Property Name="Indicativo" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbl_Municipio_tbl_Departamento">
+          <End Role="tbl_Departamento" Type="Self.tbl_Departamento" Multiplicity="1" />
+          <End Role="tbl_Municipio" Type="Self.tbl_Municipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Departamento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="tbl_Municipio">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_UpdateDepartamentos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="codigo" Type="int" Mode="In" />
+          <Parameter Name="nombre" Type="nvarchar" Mode="In" />
+          <Parameter Name="codigoAuxiliar" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BDTelefoniaModelStoreContainer">
+          <EntitySet Name="tbl_Departamento" EntityType="Self.tbl_Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Municipio" EntityType="Self.tbl_Municipio" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_Municipio_tbl_Departamento" Association="Self.FK_tbl_Municipio_tbl_Departamento">
+            <End Role="tbl_Departamento" EntitySet="tbl_Departamento" />
+            <End Role="tbl_Municipio" EntitySet="tbl_Municipio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BDTelefoniaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Departamento">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tbl_Municipio" Relationship="Self.FK_tbl_Municipio_tbl_Departamento" FromRole="tbl_Departamento" ToRole="tbl_Municipio" />
+        </EntityType>
+        <EntityType Name="tbl_Municipio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodigoDepartamento" Type="Int32" Nullable="false" />
+          <Property Name="Indicativo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbl_Departamento" Relationship="Self.FK_tbl_Municipio_tbl_Departamento" FromRole="tbl_Municipio" ToRole="tbl_Departamento" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_tbl_Municipio_tbl_Departamento">
+          <End Role="tbl_Departamento" Type="Self.tbl_Departamento" Multiplicity="1" />
+          <End Role="tbl_Municipio" Type="Self.tbl_Municipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Departamento">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="tbl_Municipio">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BDTelefoniaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Departamento" EntityType="Self.tbl_Departamento" />
+          <EntitySet Name="tbl_Municipio" EntityType="Self.tbl_Municipio" />
+          <AssociationSet Name="FK_tbl_Municipio_tbl_Departamento" Association="Self.FK_tbl_Municipio_tbl_Departamento">
+            <End Role="tbl_Departamento" EntitySet="tbl_Departamento" />
+            <End Role="tbl_Municipio" EntitySet="tbl_Municipio" />
+          </AssociationSet>
+          <FunctionImport Name="sp_UpdateDepartamentos">
+            <Parameter Name="codigo" Mode="In" Type="Int32" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="codigoAuxiliar" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BDTelefoniaModelStoreContainer" CdmEntityContainer="BDTelefoniaEntities">
+          <EntitySetMapping Name="tbl_Departamento">
+            <EntityTypeMapping TypeName="BDTelefoniaModel.tbl_Departamento">
+              <MappingFragment StoreEntitySet="tbl_Departamento">
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Municipio">
+            <EntityTypeMapping TypeName="BDTelefoniaModel.tbl_Municipio">
+              <MappingFragment StoreEntitySet="tbl_Municipio">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodigoDepartamento" ColumnName="CodigoDepartamento" />
+                <ScalarProperty Name="Indicativo" ColumnName="Indicativo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_UpdateDepartamentos" FunctionName="BDTelefoniaModel.Store.sp_UpdateDepartamentos" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

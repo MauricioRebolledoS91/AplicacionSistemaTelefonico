@@ -1,0 +1,44 @@
+﻿@model SistemaTelefonico.ViewModels.MunicipioViewModel
+
+@{
+    ViewBag.Title = "Buscar";
+}
+
+<h2>Buscar</h2>
+
+<div>
+    <h4>Información Indicativos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+
+        </dt>
+
+        <dd>
+            El indicativo es del municipio de @Html.DisplayFor(model => model.Nombre)
+            que queda en el departamento de @Html.DisplayFor(model => model.NombreDepartamento)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Departamentos.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Departamentos.Nombre)
+        </dd>*@
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>

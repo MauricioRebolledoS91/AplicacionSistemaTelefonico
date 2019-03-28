@@ -1,0 +1,13 @@
+Aplicación web, desarrollada en Asp .net mvc5, entity framework 6.
+Servidor de aplicaciones IIS Express.
+
+Script de la base de datos, diseñada en sql server 2014
+
+Aplicación desarrollada en 4 cAPAS 
+
+- Capa Entites
+- Capa Bussines Logic
+- Capa Front
+- Capa Data Access
+
+Verificar la instancia  de la base de datos en la cadena de conexion en el web config, que concuerde con la instancia de su base de datos local o la que utilicen
